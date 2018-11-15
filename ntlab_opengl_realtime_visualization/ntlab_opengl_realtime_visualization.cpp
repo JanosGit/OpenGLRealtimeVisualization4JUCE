@@ -24,9 +24,13 @@ SOFTWARE.
 
 
 #include "2DPlot/Plot2D.cpp"
+
 #include "GUIComponents/OscilloscopeComponent.cpp"
 #include "GUIComponents/SpectralAnalyzerComponent.cpp"
+
 #include "RealtimeDataTransfer/OscilloscopeDataCollector.cpp"
 #include "RealtimeDataTransfer/SpectralDataCollector.cpp"
+
 #include "Shader/LineShader.cpp"
+
 #include "Utilities/Float2String.cpp"
