@@ -154,6 +154,7 @@ namespace ntlab
         // Always set the samplerate before setting the time viewed!
         jassert (tSample != 1);
         numSamplesExpected = juce::roundToInt (tView / tSample);
+        numSamplesInCurrentBlock = 0;
         updateGUITimebase();
         recalculateMemory();
     }
