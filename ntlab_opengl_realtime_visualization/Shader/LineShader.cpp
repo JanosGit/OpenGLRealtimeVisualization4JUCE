@@ -27,8 +27,11 @@ SOFTWARE.
 
 namespace ntlab
 {
-    const juce::String LineShader2D::vertex
-            = "attribute vec2 aCoord2d;\n"
+    const juce::String LineShader2D::vertex =
+#if JUCE_IOS || JUCE_ANDROID
+            "precision mediump float;\n"
+#endif
+              "attribute vec2 aCoord2d;\n"
               "uniform float uScaleX;\n"
               "uniform float uScaleY;\n"
               "uniform float uOffsetX;\n"
@@ -46,8 +49,11 @@ namespace ntlab
               "  }\n"
               "}";
 
-    const juce::String LineShader2D::fragment
-            = "uniform vec4 uLineColour;\n"
+    const juce::String LineShader2D::fragment =
+#if JUCE_IOS || JUCE_ANDROID
+            "precision mediump float;\n"
+#endif
+              "uniform vec4 uLineColour;\n"
               "\n"
               "void main (void) {\n"
               "  gl_FragColor = uLineColour;\n"
