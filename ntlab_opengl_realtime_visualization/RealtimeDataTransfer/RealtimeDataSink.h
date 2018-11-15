@@ -53,7 +53,9 @@ namespace ntlab
          * is identified by a unique identifier which must match the one passed to the visualisation target constructor.
          * In case of a local connection make sure that the visualisation target was added to the source before adding
          * the dataChannel. It's expected that the class implementing this method assigns the
-         * DataCollector::pushDataBlock lambda
+         * DataCollector::dataBlockReady lambda to be notified when a new data block is available.
+         *
+         * !!! Make sure that the DataCollectors is not deleted before the end of this instance's lifetime
          */
         virtual juce::Result registerDataCollector (DataCollector& dataCollector) = 0;
 
