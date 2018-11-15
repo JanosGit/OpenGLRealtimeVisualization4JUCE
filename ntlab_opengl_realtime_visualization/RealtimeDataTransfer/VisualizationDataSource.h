@@ -38,8 +38,8 @@ namespace ntlab
      *
      * This class contains a valueTree member to store the settings of the Target(Component) as it is expected that
      * some mechanism to store the settings is needed anyway and the value tree seems to be suited to be integrated in
-     * existing JUCE apps. However, all parameters managed by can also be set by setter functions implemented by classes
-     * inheriting from VisualizationTarget.
+     * existing JUCE apps. However, all parameters managed by the valueTree can also be set by setter functions
+     * implemented by classes inheriting from VisualizationTarget.
      */
     class VisualizationTarget
     {
