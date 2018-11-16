@@ -22,15 +22,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "RealtimeDataTransfer/OscilloscopeDataCollector.cpp"
+#include "RealtimeDataTransfer/SpectralDataCollector.cpp"
+
+#include "Utilities/Float2String.cpp"
+
+#if JUCE_MODULE_AVAILABLE_juce_opengl
 
 #include "2DPlot/Plot2D.cpp"
 
 #include "GUIComponents/OscilloscopeComponent.cpp"
 #include "GUIComponents/SpectralAnalyzerComponent.cpp"
 
-#include "RealtimeDataTransfer/OscilloscopeDataCollector.cpp"
-#include "RealtimeDataTransfer/SpectralDataCollector.cpp"
-
 #include "Shader/LineShader.cpp"
 
-#include "Utilities/Float2String.cpp"
+#endif

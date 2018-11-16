@@ -39,20 +39,13 @@ SOFTWARE.
   website:          www.github.com/janosgit
   license:          MIT
 
-  dependencies:     juce_gui_basics, juce_opengl, juce_dsp
+  dependencies:     juce_dsp
 
  END_JUCE_MODULE_DECLARATION
 
 *******************************************************************************/
 
 #pragma once
-
-#include "2DPlot/Plot2D.h"
-
-#include "Buffers/SwappableBuffer.h"
-
-#include "GUIComponents/OscilloscopeComponent.h"
-#include "GUIComponents/SpectralAnalyzerComponent.h"
 
 #include "RealtimeDataTransfer/DataCollector.h"
 #include "RealtimeDataTransfer/LocalDataSinkAndSource.h"
@@ -61,8 +54,22 @@ SOFTWARE.
 #include "RealtimeDataTransfer/SpectralDataCollector.h"
 #include "RealtimeDataTransfer/VisualizationDataSource.h"
 
+#include "Buffers/SwappableBuffer.h"
+
+#include "Utilities/Float2String.h"
+
+// These parts of the module won't be needed by the sender, which might be a GUI-less application maybe not even
+// running on a system with any GUI
+#if JUCE_MODULE_AVAILABLE_juce_opengl
+
+#include "2DPlot/Plot2D.h"
+
+#include "GUIComponents/OscilloscopeComponent.h"
+#include "GUIComponents/SpectralAnalyzerComponent.h"
+
 #include "Shader/Attributes.h"
 #include "Shader/Uniforms.h"
 #include "Shader/LineShader.h"
 
-#include "Utilities/Float2String.h"
+#endif
+
