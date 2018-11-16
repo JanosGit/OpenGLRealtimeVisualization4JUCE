@@ -7,7 +7,7 @@ This repo should contain some classes helping to implement Open GL accelerated J
 
 Furthermore all visualization Components are designed to (re)store their state through a JUCE ValueTree.
 
-To use it, just add it to your personal modules folder and add it to your Project from within the Projucer. Note that the JUCE OpenGL module is not specified as a dependency to this project because the module is also designed for scenarios where the sender is a GUI-less process maybe even running on an embedded processor without any GUI ressources.
+To use it, just add it to your personal modules folder and add it to your Project from within the Projucer. Note that the JUCE OpenGL module is not specified as a dependency to this project because the module is also designed for scenarios where the sender is a GUI-less process maybe even running on an embedded processor without any GUI ressources. However adding the juce_opengl module to your project will enable all GUI-related parts of this module.
 
 ## Currently implemented parts
 ### GUI Components  
