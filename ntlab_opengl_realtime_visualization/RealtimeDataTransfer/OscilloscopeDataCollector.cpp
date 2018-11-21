@@ -175,6 +175,7 @@ namespace ntlab
     {
         updateGUITimebase();
         updateGUIChannels();
+        updateGUITriggering();
     }
 
     void OscilloscopeDataCollector::updateGUITimebase()

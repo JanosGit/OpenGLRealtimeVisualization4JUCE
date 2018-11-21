@@ -93,6 +93,12 @@ namespace ntlab
          */
         void pushChannelsSamples (juce::AudioBuffer<float> &bufferToPush);
 
+        /**
+         * Updates all parameters relevant for the Visualization. Call this after (re-)connecting if your collector
+         * to sink connection is network based to keep both ends in sync.
+         */
+        void updateAllGUIParameters();
+
         void applySettingFromTarget (const juce::String& setting, const juce::var& value) override;
 
     private:
@@ -124,8 +130,6 @@ namespace ntlab
         void recalculateNumSamples();
 
         void recalculateMemory();
-
-        void updateAllGUIParameters();
 
         void updateGUITimebase();
 

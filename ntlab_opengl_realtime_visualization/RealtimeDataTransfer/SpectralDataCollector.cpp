@@ -94,6 +94,11 @@ namespace ntlab
         }
     }
 
+    void SpectralDataCollector::updateAllGUIParameters ()
+    {
+        updateGUIChannels();
+    }
+
     void SpectralDataCollector::applySettingFromTarget (const juce::String &setting, const juce::var &value)
     {
         if (setting == settingFFTOrder)
