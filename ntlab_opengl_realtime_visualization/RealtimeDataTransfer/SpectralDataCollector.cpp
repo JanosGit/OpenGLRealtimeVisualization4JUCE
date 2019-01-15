@@ -48,22 +48,20 @@ namespace ntlab
         windowingFunction.reset (new juce::dsp::WindowingFunction<float> (static_cast<size_t> (numSamplesExpected), juce::dsp::WindowingFunction<float>::hamming));
         recalculateMemory();
 
-        juce::var fo (fftOrder);
-        sink->applySettingToTarget (*this, settingFFTOrder, fo);
+        updateGUIFFTOrder();
     }
 
-    void SpectralDataCollector::setSampleRate (double newSampleRate, double startFrequency)
+    void SpectralDataCollector::setSampleRate (double newSampleRate, double newStartFrequency)
     {
         // as setSampleRate is always called to initialize processing, allocating memory here for an unspecified fft
         // order should be fine
         if (fftOrder == 0)
             setFFTOrder (11);
 
-        double endFrequency = newSampleRate + startFrequency;
-        juce::var sf (startFrequency);
-        juce::var ef (endFrequency);
-        sink->applySettingToTarget (*this, settingStartFrequency, sf);
-        sink->applySettingToTarget (*this, settingEndFrequency, ef);
+        sampleRate = newSampleRate;
+        startFrequency = newStartFrequency;
+
+        updateGUIFrequencySpan();
     }
 
     void SpectralDataCollector::pushChannelsSamples (juce::AudioBuffer<float> &bufferToPush)
@@ -97,6 +95,8 @@ namespace ntlab
     void SpectralDataCollector::updateAllGUIParameters ()
     {
         updateGUIChannels();
+        updateGUIFrequencySpan();
+        updateGUIFFTOrder();
     }
 
     void SpectralDataCollector::applySettingFromTarget (const juce::String &setting, const juce::var &value)
@@ -184,6 +184,23 @@ namespace ntlab
         sink->applySettingToTarget (*this, settingChannelNames, cn);
     }
 
+    void SpectralDataCollector::updateGUIFFTOrder()
+    {
+        juce::var fo (fftOrder);
+        sink->applySettingToTarget (*this, settingFFTOrder, fo);
+    }
+
+    void SpectralDataCollector::updateGUIFrequencySpan()
+    {
+        // Have you called updateAllGUIParameters before setting the sample rate?
+        jassert (sampleRate > 0.0);
+
+        double endFrequency = sampleRate + startFrequency;
+        juce::var sf (startFrequency);
+        juce::var ef (endFrequency);
+        sink->applySettingToTarget (*this, settingStartFrequency, sf);
+        sink->applySettingToTarget (*this, settingEndFrequency, ef);
+    }
     const juce::String SpectralDataCollector::settingNumChannels    ("numChannels");
     const juce::String SpectralDataCollector::settingChannelNames   ("channelNames");
     const juce::String SpectralDataCollector::settingStartFrequency ("startFrequency");

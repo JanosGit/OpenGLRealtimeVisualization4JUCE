@@ -83,7 +83,7 @@ namespace ntlab
          * If the spectral analyzer displays RF data that was mixed down, setting the startFrequency value to a
          * value different from 0 will result in correct scaling of the frequency axis
          */
-        void setSampleRate (double newSampleRate, double startFrequency = 0.0);
+        void setSampleRate (double newSampleRate, double newStartFrequency = 0.0);
 
         /**
          * Pushes an audio buffer to the sample queue holding as much channels as should
@@ -105,6 +105,9 @@ namespace ntlab
         std::unique_ptr<juce::dsp::FFT> fft;
         std::unique_ptr<juce::dsp::WindowingFunction<float>> windowingFunction;
         int fftOrder = 0;
+        double sampleRate = 0.0;
+        double startFrequency = 0.0;
+
         int numSamplesExpected = 0;
         static const int numFFTSToAverage = 3;
         int numFFTSCalculated = 0;
@@ -129,5 +132,9 @@ namespace ntlab
         void processFFT();
 
         void updateGUIChannels();
+
+        void updateGUIFFTOrder();
+
+        void updateGUIFrequencySpan();
     };
 }
