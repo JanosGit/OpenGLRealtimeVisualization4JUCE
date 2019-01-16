@@ -31,6 +31,7 @@ SOFTWARE.
 #include <juce_opengl/juce_opengl.h>
 #include "../Shader/LineShader.h"
 #include "../Utilities/Float2String.h"
+#include "../Utilities/SharedOpenGLContext.h"
 
 namespace ntlab
 {
@@ -230,7 +231,7 @@ namespace ntlab
     private:
 
         // OpenGL related member variables
-        juce::OpenGLContext           openGLContext;
+        juce::OpenGLContext&          openGLContext;
         std::unique_ptr<LineShader2D> lineShader;
         GLuint                        gridLineGLBuffer;
         bool                          shouldRenderGrid = false;
@@ -270,8 +271,8 @@ namespace ntlab
         // Used to hold lambdas to be executed in the next render callback. This is useful for cases where an operation
         // must be executed from the GL thread and interact with the GPU (such as allocating the buffer for a channel)
         // but the call might come from any thread at any time - maybe before any GPU has been choosen by the system at all
-        std::vector<std::function<void(juce::OpenGLContext&)>> executeInRenderCallback;
-        std::mutex executeInRenderCallbackLock;
+        //std::vector<std::function<void(juce::OpenGLContext&)>> executeInRenderCallback;
+        //std::mutex executeInRenderCallbackLock;
 
         // OpenGL related member functions
         void newOpenGLContextCreated() override;

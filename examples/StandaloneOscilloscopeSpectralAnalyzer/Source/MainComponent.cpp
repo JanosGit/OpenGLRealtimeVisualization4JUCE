@@ -32,6 +32,8 @@ MainComponent::MainComponent() :
         oscilloscopeComponent     ("MicSignals"),
         spectralAnalyzerComponent ("MicSignals")
 {
+    ntlab::SharedOpenGLContext::getInstance()->setTopLevelParentComponent (*this);
+
     // Always first step: Register the target components that visualize your data
     localDataSinkAndSource.registerVisualizationTarget (oscilloscopeComponent);
     localDataSinkAndSource.registerVisualizationTarget (spectralAnalyzerComponent);
@@ -64,6 +66,7 @@ MainComponent::MainComponent() :
 MainComponent::~MainComponent()
 {
     shutdownAudio();
+    ntlab::SharedOpenGLContext::getInstance()->detachTopLevelParentComponent();
 }
 
 //==============================================================================
