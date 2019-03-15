@@ -29,6 +29,8 @@ SOFTWARE.
 
 #if JUCE_MODULE_AVAILABLE_juce_opengl
 
+#include "Utilities/SharedOpenGLContext.cpp"
+
 #include "2DPlot/Plot2D.cpp"
 
 #include "GUIComponents/OscilloscopeComponent.cpp"
