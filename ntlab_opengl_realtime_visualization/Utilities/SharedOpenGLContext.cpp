@@ -30,6 +30,9 @@ namespace ntlab
 
     bool SharedOpenGLContext::addRenderingTarget (juce::OpenGLRenderer* newTarget)
     {
+        // Make sure the target you add inherits from both Component and OpenGLRenderer public
+        jassert (dynamic_cast<juce::Component*> (newTarget) != nullptr);
+
         executeOnGLThread ([newTarget](juce::OpenGLContext&) {newTarget->newOpenGLContextCreated(); });
 
         std::lock_guard<std::mutex> scopedLock (renderingTargetsLock);
@@ -110,7 +113,12 @@ namespace ntlab
         {
             std::lock_guard<std::mutex> scopedLock (renderingTargetsLock);
             for (auto* target : renderingTargets)
-                target->renderOpenGL();
+            {
+                auto* component = dynamic_cast<juce::Component*> (target);
+
+                if (component->isVisible())
+                    target->renderOpenGL();
+            }
         }
 
     }

@@ -44,7 +44,7 @@ namespace ntlab
      *
      * This component uses OpenGL for rendering.
      */
-    class Plot2D : public juce::Component, private juce::OpenGLRenderer
+    class Plot2D : public juce::Component, public juce::OpenGLRenderer
     {
 
     public:
@@ -228,6 +228,11 @@ namespace ntlab
         /** Helper function: Returns the corresponding range of log scaled values to a given linear scaled range */
         static juce::Range<float> linearRangeToLogRange (juce::Range<float> linearRange, LogScaling scalingMode);
 
+        // OpenGLRenderer related member functions
+        void newOpenGLContextCreated() override;
+        void renderOpenGL() override;
+        void openGLContextClosing() override;
+
     private:
 
         // OpenGL related member variables
@@ -267,17 +272,6 @@ namespace ntlab
         int legendState = -1;
         bool drawLegendBorder = true;
         float legendBackgroundTransparency = 0.5f;
-
-        // Used to hold lambdas to be executed in the next render callback. This is useful for cases where an operation
-        // must be executed from the GL thread and interact with the GPU (such as allocating the buffer for a channel)
-        // but the call might come from any thread at any time - maybe before any GPU has been choosen by the system at all
-        //std::vector<std::function<void(juce::OpenGLContext&)>> executeInRenderCallback;
-        //std::mutex executeInRenderCallbackLock;
-
-        // OpenGL related member functions
-        void newOpenGLContextCreated() override;
-        void renderOpenGL() override;
-        void openGLContextClosing() override;
 
         // Some member functions needed to compute the visual aperance
         void getLineWidthRangePossibleForGPU();
