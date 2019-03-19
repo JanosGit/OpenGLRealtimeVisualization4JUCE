@@ -63,6 +63,7 @@ SOFTWARE.
 #if JUCE_MODULE_AVAILABLE_juce_opengl
 
 #include "Utilities/SharedOpenGLContext.h"
+#include "Utilities/SerializableRange.h"
 
 #include "2DPlot/Plot2D.h"
 

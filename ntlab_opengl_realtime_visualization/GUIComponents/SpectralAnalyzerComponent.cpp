@@ -25,6 +25,7 @@ SOFTWARE.
 
 #include "SpectralAnalyzerComponent.h"
 #include "../RealtimeDataTransfer/SpectralDataCollector.h"
+#include "../Utilities/SerializableRange.h"
 
 namespace ntlab
 {
@@ -41,11 +42,11 @@ namespace ntlab
     {
         // create value tree properties
         valueTree.addListener (this);
-        valueTree.setProperty (parameterFFTOrder,                11,                            undoManager);
-        valueTree.setProperty (parameterMagnitudeRange, juce::Array<juce::var> ({-60.0, 10.0}), undoManager);
-        valueTree.setProperty (parameterHideNegativeFrequencies, true,                          undoManager);
-        valueTree.setProperty (parameterMagnitudeLinearDB,       true,                          undoManager);
-        valueTree.setProperty (parameterFrequencyLinearLog,      true,                          undoManager);
+        valueTree.setProperty (parameterFFTOrder,                11,                              undoManager);
+        valueTree.setProperty (parameterMagnitudeRange, SerializableRange<float> (-60.0f, 10.0f), undoManager);
+        valueTree.setProperty (parameterHideNegativeFrequencies, true,                            undoManager);
+        valueTree.setProperty (parameterMagnitudeLinearDB,       true,                            undoManager);
+        valueTree.setProperty (parameterFrequencyLinearLog,      true,                            undoManager);
 
         setBackgroundColour (juce::Colours::darkturquoise, false);
 
@@ -190,9 +191,7 @@ namespace ntlab
             else if ((property == parameterMagnitudeLinearDB) || (property == parameterMagnitudeRange))
             {
                 bool magnitudeShouldBeLog = valueTree.getProperty (parameterMagnitudeLinearDB);
-                auto magnitudeRangeArray  = valueTree.getProperty (parameterMagnitudeRange).getArray();
-                jassert (magnitudeRangeArray != nullptr);
-                juce::Range<float> magnitudeRange (magnitudeRangeArray->getFirst(), magnitudeRangeArray->getLast());
+                SerializableRange<float> magnitudeRange (valueTree.getProperty (parameterMagnitudeRange));
 
                 if (magnitudeShouldBeLog)
                 {
