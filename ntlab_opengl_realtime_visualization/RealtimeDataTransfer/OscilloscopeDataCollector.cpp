@@ -27,7 +27,7 @@ SOFTWARE.
 
 namespace ntlab
 {
-    void OscilloscopeDataCollector::setChannels (int numChannels, juce::StringArray &channelNames)
+    void OscilloscopeDataCollector::setChannels (int numChannels, juce::StringArray channelNames)
     {
         this->numChannels = numChannels;
         this->channelNames = channelNames;
