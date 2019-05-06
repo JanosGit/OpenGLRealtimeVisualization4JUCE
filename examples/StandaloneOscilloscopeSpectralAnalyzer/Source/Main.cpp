@@ -40,9 +40,17 @@ public:
     void initialise (const String& commandLine) override
     {
         // This method is where you should put your application's initialisation code..
+        auto microphonePermission = RuntimePermissions::recordAudio;
+        RuntimePermissions::request (microphonePermission, microphonePermissionCallback);
 
         mainWindow.reset (new MainWindow (getApplicationName()));
     }
+
+    static void microphonePermissionCallback (bool wasGranted)
+    {
+        if (!wasGranted)
+            AlertWindow::showMessageBoxAsync (AlertWindow::WarningIcon, "Runtime permission error", "Microphone access was not granted by the system, the application might not work");
+    };
 
     void shutdown() override
     {

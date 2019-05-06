@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="w6rCEC" name="StandaloneOscilloscopeSpectralAnalyzer" projectType="guiapp"
-              jucerVersion="5.3.2">
+              jucerVersion="5.4.3">
   <MAINGROUP id="OQu1VB" name="StandaloneOscilloscopeSpectralAnalyzer">
     <GROUP id="{E8A9B3F7-670F-89E8-5A86-D8D6D5D74DE9}" name="Source">
       <FILE id="QC9Ndi" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
@@ -11,7 +11,7 @@
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX">
+    <XCODE_MAC targetFolder="Builds/MacOSX" microphonePermissionNeeded="1" microphonePermissionsText="To visualize the audio picked up by the built-in microphone this application needs access to the microphone.">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug"/>
         <CONFIGURATION isDebug="0" name="Release"/>
@@ -48,6 +48,7 @@
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_osc" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="ntlab_opengl_realtime_visualization" showAllCode="1" useLocalCopy="0"
             useGlobalPath="0"/>
   </MODULES>
