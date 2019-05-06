@@ -57,13 +57,13 @@ SOFTWARE.
 #include "Buffers/SwappableBuffer.h"
 
 #include "Utilities/Float2String.h"
+#include "Utilities/SerializableRange.h"
 
 // These parts of the module won't be needed by the sender, which might be a GUI-less application maybe not even
 // running on a system with any GUI
 #if JUCE_MODULE_AVAILABLE_juce_opengl
 
 #include "Utilities/SharedOpenGLContext.h"
-#include "Utilities/SerializableRange.h"
 
 #include "2DPlot/Plot2D.h"
 
