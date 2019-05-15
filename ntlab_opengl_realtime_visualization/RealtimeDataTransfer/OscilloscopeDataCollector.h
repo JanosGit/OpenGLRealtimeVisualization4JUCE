@@ -56,10 +56,10 @@ namespace ntlab
         static const juce::String settingChannelNames;
 
         /**
-         * Specifiy an identifier extension to map the DataCollector to the corresponding target.
+         * Specify an identifier extension to map the DataCollector to the corresponding target.
          * The Identifier will automatically be prepended by "Oscilloscope"
          */
-        OscilloscopeDataCollector (const juce::String identifierExtension) : DataCollector ("Oscilloscope" + identifierExtension) {};
+        OscilloscopeDataCollector (const juce::String identifierExtension = "1") : DataCollector ("Oscilloscope" + identifierExtension) {};
 
         virtual ~OscilloscopeDataCollector () {};
 
@@ -70,7 +70,7 @@ namespace ntlab
          * @param numChannels    The new number of channels displayed by the oscilloscope
          * @param channelNames   An Array of size channelNames containing the names to be displayed for each channel
          */
-        void setChannels (int numChannels, juce::StringArray &channelNames);
+        void setChannels (int numChannels, juce::StringArray channelNames = juce::StringArray());
 
         /**
          * Set the timeframe viewed by the Oscilloscope. This impacts the number of samples collected before a GUI update.
