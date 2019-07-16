@@ -28,7 +28,7 @@ SOFTWARE.
 
 namespace ntlab
 {
-    class SharedOpenGLContext : private juce::OpenGLRenderer
+    class SharedOpenGLContext : public juce::DeletedAtShutdown, private juce::OpenGLRenderer
     {
     public:
         SharedOpenGLContext();
@@ -65,5 +65,7 @@ namespace ntlab
         void newOpenGLContextCreated() override;
         void renderOpenGL() override;
         void openGLContextClosing() override;
+
+        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SharedOpenGLContext)
     };
 }

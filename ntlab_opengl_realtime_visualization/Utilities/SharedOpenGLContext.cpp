@@ -37,6 +37,8 @@ namespace ntlab
     {
         // make sure all your OpenGLRenderer targets have been removed before the shared context is closing
         jassert (renderingTargets.size() == 0);
+
+        clearSingletonInstance();
     }
 
     void SharedOpenGLContext::setTopLevelParentComponent (juce::Component& topLevelComponent)
