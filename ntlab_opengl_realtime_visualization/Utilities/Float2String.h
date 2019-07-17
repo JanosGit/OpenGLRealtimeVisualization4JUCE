@@ -62,10 +62,10 @@ namespace ntlab
         {
             static_assert (std::is_floating_point<FloatType>::value, "Only floating point types are allowed for Float2String");
 
-            if (isnan (floatNumber))
+            if (std::isnan (floatNumber))
                 return "NaN";
 
-            if (isinf (floatNumber))
+            if (std::isinf (floatNumber))
                 return "Inf";
 
             // if you are hitting this assert, the number is too big to be displayed by this number of digits and will
@@ -148,17 +148,17 @@ namespace ntlab
         template <typename FloatType>
         static juce::String withSIPrefix (FloatType floatNumber, int overallNumberOfDigits, SIPrefix desiredPrefix)
         {
-            if (isnan (floatNumber))
+            if (std::isnan (floatNumber))
                 return "NaN";
 
-            if (isinf (floatNumber))
+            if (std::isinf (floatNumber))
                 return "Inf";
 
             int prefixIdx = desiredPrefix;
             int exponentBase10 = prefixIdx * 3;
 
             prefixIdx += siPrefixArrayOffset;
-            floatNumber /= std::powf (10, exponentBase10);
+            floatNumber /= std::pow (10, exponentBase10);
 
             return withFixedLength (floatNumber, overallNumberOfDigits) + siPrefixes[prefixIdx];
         }

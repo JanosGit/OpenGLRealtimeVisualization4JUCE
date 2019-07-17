@@ -24,6 +24,7 @@ SOFTWARE.
 
 
 #pragma once
+#include <bitset>
 
 #include "../RealtimeDataTransfer/VisualizationDataSource.h"
 #include "../2DPlot/Plot2D.h"
