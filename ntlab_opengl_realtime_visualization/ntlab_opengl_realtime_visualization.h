@@ -63,7 +63,7 @@ SOFTWARE.
 // running on a system with any GUI
 #if JUCE_MODULE_AVAILABLE_juce_opengl
 
-#include "Utilities/SharedOpenGLContext.h"
+#include "Utilities/WindowOpenGLContext.h"
 
 #include "2DPlot/Plot2D.h"
 

@@ -31,7 +31,7 @@ SOFTWARE.
 #include <juce_opengl/juce_opengl.h>
 #include "../Shader/LineShader.h"
 #include "../Utilities/Float2String.h"
-#include "../Utilities/SharedOpenGLContext.h"
+#include "../Utilities/WindowOpenGLContext.h"
 
 namespace ntlab
 {
@@ -69,7 +69,7 @@ namespace ntlab
         /**
          * Creates a plot2D instance with 0 data lines and an empty xValue range.
          */
-        Plot2D (bool updateAtFramerate);
+        Plot2D (bool updateAtFramerate, WindowOpenGLContext& glContext);
 
         /**
          * Creata a Plot2D instance with 0 data lines and the given xValue range. To get the number of x values created
@@ -79,7 +79,7 @@ namespace ntlab
          * @param xValueDelta       the spacing between the x values
          * @param xValueScaling     set to none for a linear x scale or to baseE for a logarithmic scaled x axis
          */
-        Plot2D (bool updateAtFramerate, juce::Range<float> xValueRange, float xValueDelta, LogScaling xValueScaling = LogScaling::none);
+        Plot2D (bool updateAtFramerate, WindowOpenGLContext& glContext, juce::Range<float> xValueRange, float xValueDelta, LogScaling xValueScaling = LogScaling::none);
 
         ~Plot2D();
 
@@ -236,6 +236,7 @@ namespace ntlab
     private:
 
         // OpenGL related member variables
+        WindowOpenGLContext&          windowOpenGLContext;
         juce::OpenGLContext&          openGLContext;
         std::unique_ptr<LineShader2D> lineShader;
         GLuint                        gridLineGLBuffer;
@@ -272,6 +273,7 @@ namespace ntlab
         int legendState = -1;
         bool drawLegendBorder = true;
         float legendBackgroundTransparency = 0.5f;
+
 
         // Some member functions needed to compute the visual aperance
         void getLineWidthRangePossibleForGPU();
