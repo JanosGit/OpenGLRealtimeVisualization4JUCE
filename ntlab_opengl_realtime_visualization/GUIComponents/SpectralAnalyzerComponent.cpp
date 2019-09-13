@@ -36,9 +36,9 @@ namespace ntlab
     const juce::Identifier SpectralAnalyzerComponent::parameterMagnitudeLinearDB       ("magnitudeLinearDB");
     const juce::Identifier SpectralAnalyzerComponent::parameterFrequencyLinearLog      ("frequencyLinearLog");
 
-    SpectralAnalyzerComponent::SpectralAnalyzerComponent (const juce::String identifierExtension, juce::UndoManager *undoManager)
+    SpectralAnalyzerComponent::SpectralAnalyzerComponent (const juce::String identifierExtension, WindowOpenGLContext& windowOpenGlContext, juce::UndoManager *undoManager)
     : VisualizationTarget ("SpectralAnalyzer" + identifierExtension, undoManager),
-      Plot2D (true)
+      Plot2D (true, windowOpenGlContext)
     {
         // create value tree properties
         valueTree.addListener (this);

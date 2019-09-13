@@ -66,7 +66,7 @@ namespace ntlab
          * The Identifier will automatically be prepended by "SpectralAnalyzer". The optional undo manager can
          * be passed to enable undo functionality for the parameters held by the ValueTree.
          */
-        SpectralAnalyzerComponent (const juce::String identifierExtension, juce::UndoManager* undoManager = nullptr);
+        SpectralAnalyzerComponent (const juce::String identifierExtension, WindowOpenGLContext& windowOpenGlContext, juce::UndoManager* undoManager = nullptr);
 
         ~SpectralAnalyzerComponent();
 

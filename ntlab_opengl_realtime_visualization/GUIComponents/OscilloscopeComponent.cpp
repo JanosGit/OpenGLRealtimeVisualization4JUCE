@@ -32,9 +32,9 @@ namespace ntlab
     const juce::Identifier OscilloscopeComponent::parameterTimeViewed       ("timeViewed");
     const juce::Identifier OscilloscopeComponent::parameterEnableTriggering ("enableTriggering");
 
-    OscilloscopeComponent::OscilloscopeComponent (const juce::String identifierExtension, juce::UndoManager* undoManager)
+    OscilloscopeComponent::OscilloscopeComponent (const juce::String identifierExtension, WindowOpenGLContext& windowOpenGlContext, juce::UndoManager* undoManager)
     : VisualizationTarget ("Oscilloscope" + identifierExtension, undoManager),
-      Plot2D (true)
+      Plot2D (true, windowOpenGlContext)
     {
         valueTree.addListener (this);
         valueTree.setProperty (parameterGainLinear,       1.0,   undoManager);
