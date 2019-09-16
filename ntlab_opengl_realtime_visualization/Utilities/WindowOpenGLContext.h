@@ -1,3 +1,4 @@
+#pragma once
 /*
 MIT License
 
@@ -22,18 +23,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
 
 #include <juce_opengl/juce_opengl.h>
 
 namespace ntlab
 {
-    class SharedOpenGLContext : public juce::DeletedAtShutdown, private juce::OpenGLRenderer
+    class WindowOpenGLContext :  private juce::OpenGLRenderer
     {
     public:
-        SharedOpenGLContext();
+        WindowOpenGLContext();
 
-        ~SharedOpenGLContext();
+        ~WindowOpenGLContext();
 
         void setTopLevelParentComponent (juce::Component& topLevelComponent);
 
@@ -51,7 +51,6 @@ namespace ntlab
 
         juce::OpenGLContext openGLContext;
 
-        JUCE_DECLARE_SINGLETON (SharedOpenGLContext, false)
     private:
         juce::Component* topLevelComponent = nullptr;
 
@@ -66,6 +65,6 @@ namespace ntlab
         void renderOpenGL() override;
         void openGLContextClosing() override;
 
-        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SharedOpenGLContext)
+        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (WindowOpenGLContext)
     };
 }

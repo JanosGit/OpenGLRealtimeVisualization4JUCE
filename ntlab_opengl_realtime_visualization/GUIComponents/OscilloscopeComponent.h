@@ -55,7 +55,7 @@ namespace ntlab
          * The Identifier will automatically be prepended by "Oscilloscope". The optional undo manager can
          * be passed to enable undo functionality for the parameters held by the ValueTree.
          */
-        OscilloscopeComponent (const juce::String identifierExtension, juce::UndoManager* undoManager = nullptr);
+        OscilloscopeComponent (const juce::String identifierExtension, WindowOpenGLContext& windowOpenGlContext, juce::UndoManager* undoManager = nullptr);
 
         ~OscilloscopeComponent();
 

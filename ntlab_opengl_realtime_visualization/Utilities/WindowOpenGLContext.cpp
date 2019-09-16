@@ -22,37 +22,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "SharedOpenGLContext.h"
+#include "WindowOpenGLContext.h"
 
 namespace ntlab
 {
-    JUCE_IMPLEMENT_SINGLETON (SharedOpenGLContext)
 
-    SharedOpenGLContext::SharedOpenGLContext ()
+    WindowOpenGLContext::WindowOpenGLContext ()
     {
         openGLContext.setRenderer (this);
     }
 
-    SharedOpenGLContext::~SharedOpenGLContext ()
+    WindowOpenGLContext::~WindowOpenGLContext ()
     {
         // make sure all your OpenGLRenderer targets have been removed before the shared context is closing
         jassert (renderingTargets.size() == 0);
-
-        clearSingletonInstance();
     }
 
-    void SharedOpenGLContext::setTopLevelParentComponent (juce::Component& topLevelComponent)
+    void WindowOpenGLContext::setTopLevelParentComponent (juce::Component& topLevelComponent)
     {
         this->topLevelComponent = &topLevelComponent;
         openGLContext.attachTo (topLevelComponent);
     }
 
-    void SharedOpenGLContext::detachTopLevelParentComponent ()
+    void WindowOpenGLContext::detachTopLevelParentComponent ()
     {
         openGLContext.detach();
     }
 
-    bool SharedOpenGLContext::addRenderingTarget (juce::OpenGLRenderer* newTarget)
+    bool WindowOpenGLContext::addRenderingTarget (juce::OpenGLRenderer* newTarget)
     {
         // Make sure the target you add inherits from both Component and OpenGLRenderer public
         jassert (dynamic_cast<juce::Component*> (newTarget) != nullptr);
@@ -65,9 +62,9 @@ namespace ntlab
         return true;
     }
 
-    void SharedOpenGLContext::removeRenderingTarget (juce::OpenGLRenderer* targetToRemove)
+    void WindowOpenGLContext::removeRenderingTarget (juce::OpenGLRenderer* targetToRemove)
     {
-        // if you hit this assertion you are trying to remove a target that is not managed by the SharedOpenGLContext
+        // if you hit this assertion you are trying to remove a target that is not managed by the WindowOpenGLContext
         jassert (renderingTargets.contains (targetToRemove));
 
         executeOnGLThread ([targetToRemove](juce::OpenGLContext&) {targetToRemove->openGLContextClosing(); });
@@ -76,20 +73,20 @@ namespace ntlab
         renderingTargets.removeFirstMatchingValue (targetToRemove);
     }
 
-    void SharedOpenGLContext::executeOnGLThread (std::function<void (juce::OpenGLContext&)>&& lambdaToExecute)
+    void WindowOpenGLContext::executeOnGLThread (std::function<void (juce::OpenGLContext&)>&& lambdaToExecute)
     {
         std::lock_guard<std::mutex> scopedLock (executeInRenderCallbackLock);
         executeInRenderCallback.emplace_back (lambdaToExecute);
     }
 
-    void SharedOpenGLContext::executeOnGLThreadMultipleTimes (std::function<void (juce::OpenGLContext&)>&& lambdaToExecute, const int repetitions)
+    void WindowOpenGLContext::executeOnGLThreadMultipleTimes (std::function<void (juce::OpenGLContext&)>&& lambdaToExecute, const int repetitions)
     {
         std::lock_guard<std::mutex> scopedLock (executeInRenderCallbackLock);
         for (int i = 0; i < repetitions; ++i)
             executeInRenderCallback.push_back (lambdaToExecute);
     }
 
-    juce::Rectangle<int> SharedOpenGLContext::getComponentClippingBoundsRelativeToGLRenderingTarget (juce::Component* targetComponent)
+    juce::Rectangle<int> WindowOpenGLContext::getComponentClippingBoundsRelativeToGLRenderingTarget (juce::Component* targetComponent)
     {
         // You haven't set the top level parent component that is used for GL rendering, how should getting the bounds
         // relative to this component work at this point?
@@ -100,7 +97,7 @@ namespace ntlab
         auto targetComponentParent = targetComponent->getParentComponent();
 
         // your component has no GL rendering parent yet. Don't call this before having added it to a component that is
-        // rendered by the SharedOpenGLContext
+        // rendered by the WindowOpenGLContext
         jassert (targetComponentParent != nullptr);
 
         auto globalBoundsTarget = targetComponentParent->localAreaToGlobal (targetComponent->getBoundsInParent());
@@ -115,12 +112,12 @@ namespace ntlab
                                      juce::roundToInt (renderingScale * targetBoundsRelativeToGLRenderingParent.getHeight()));
     }
 
-    void SharedOpenGLContext::newOpenGLContextCreated ()
+    void WindowOpenGLContext::newOpenGLContextCreated ()
     {
 
     }
 
-    void SharedOpenGLContext::renderOpenGL ()
+    void WindowOpenGLContext::renderOpenGL ()
     {
         if (topLevelComponent == nullptr)
             return;
@@ -147,7 +144,7 @@ namespace ntlab
 
     }
 
-    void SharedOpenGLContext::openGLContextClosing ()
+    void WindowOpenGLContext::openGLContextClosing ()
     {
 
     }
