@@ -29,10 +29,10 @@ SOFTWARE.
 MainComponent::MainComponent() :
         oscilloscopeDataCollector ("MicSignals"),
         spectralDataCollector     ("MicSignals"),
-        oscilloscopeComponent     ("MicSignals"),
-        spectralAnalyzerComponent ("MicSignals")
+        oscilloscopeComponent     ("MicSignals", *windowOpenGLContext),
+        spectralAnalyzerComponent ("MicSignals", *windowOpenGLContext)
 {
-    ntlab::SharedOpenGLContext::getInstance()->setTopLevelParentComponent (*this);
+    windowOpenGLContext->setTopLevelParentComponent (*this);
 
     // Always first step: Register the target components that visualize your data
     localDataSinkAndSource.registerVisualizationTarget (oscilloscopeComponent);
@@ -66,7 +66,7 @@ MainComponent::MainComponent() :
 MainComponent::~MainComponent()
 {
     shutdownAudio();
-    ntlab::SharedOpenGLContext::getInstance()->detachTopLevelParentComponent();
+    windowOpenGLContext->detachTopLevelParentComponent();
 }
 
 //==============================================================================
@@ -113,6 +113,7 @@ void MainComponent::resized()
     spectralAnalyzerComponent.setBounds (bounds.removeFromBottom (componentHeight));
 }
 
-int MainComponent::getNumberOfActiveInputChannels() {
+int MainComponent::getNumberOfActiveInputChannels()
+{
     return deviceManager.getCurrentAudioDevice()->getActiveInputChannels().countNumberOfSetBits();
 }

@@ -50,6 +50,7 @@ public:
 
 private:
     //==============================================================================
+    SharedResourcePointer<ntlab::WindowOpenGLContext> windowOpenGLContext;
 
     // collecting measurement data on the realtime thread and preprocessing them for visualization
     ntlab::OscilloscopeDataCollector oscilloscopeDataCollector;
