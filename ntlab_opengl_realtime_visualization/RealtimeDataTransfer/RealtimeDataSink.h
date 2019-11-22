@@ -64,7 +64,7 @@ namespace ntlab
          * possibility to exchange non-realtime settings values. The value itself can be any kind of data type a
          * var can represent.
          */
-        virtual void applySettingToTarget (DataCollector& dataCollector, const juce::String& setting, juce::var& value) = 0;
+        virtual void applySettingToTarget (DataCollector& dataCollector, const juce::String& setting, const juce::var& value) = 0;
     };
 }
 

@@ -69,10 +69,6 @@ namespace ntlab
                     tb.y = 0;
             };
             windowOpenGLContext.executeOnGLThread (fillTempBufferYWithZeros);
-            //{
-            //    std::lock_guard<std::mutex> scopedLock (executeInRenderCallbackLock);
-            //    executeInRenderCallback.push_back (fillTempBufferYWithZeros);
-            //}
         }
 
         GLvoid* data =       (updatesAtFramerate) ? NULL           : tempRenderDataBuffer.data();
@@ -400,7 +396,6 @@ namespace ntlab
         };
 
         windowOpenGLContext.executeOnGLThread (resizeAllLineGLBuffers);
-        //executeInRenderCallback.push_back (resizeAllLineGLBuffers);
     }
 
     void Plot2D::setup (bool updateAtFramerate)

@@ -91,7 +91,7 @@ namespace ntlab
         void setFrequencyAxisScaling (bool shouldBeLog);
 
 #ifndef DOXYGEN
-        void applySettingFromCollector (const juce::String& setting, juce::var& value) override;
+        void applySettingFromCollector (const juce::String& setting, const juce::var& value) override;
         void resized() override;
 #endif
 

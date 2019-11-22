@@ -108,7 +108,7 @@ namespace ntlab
             settingsComponent.reset (nullptr);
     }
 
-    void OscilloscopeComponent::applySettingFromCollector (const juce::String &setting, juce::var &value)
+    void OscilloscopeComponent::applySettingFromCollector (const juce::String &setting, const juce::var &value)
     {
         if (setting == OscilloscopeDataCollector::settingIsTriggered)
         {

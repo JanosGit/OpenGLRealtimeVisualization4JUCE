@@ -61,7 +61,12 @@ namespace ntlab
         {
             int correspondingTargetIdx = targetIdentifiers.indexOf (dataCollector.id);
             if (correspondingTargetIdx == -1)
+            {
+                // Seems that the identifier strings of source and target don't match
+                jassertfalse;
                 return juce::Result::fail ("Failed to find target with identifier " + dataCollector.id);
+            }
+
 
             dataCollector.sinkIdx = correspondingTargetIdx;
             dataCollector.sink = this;
@@ -85,7 +90,7 @@ namespace ntlab
             collectors[target.targetIdx]->applySettingFromTarget (setting, value);
         }
 
-        void applySettingToTarget (DataCollector &dataCollector, const juce::String& setting, juce::var& value) override
+        void applySettingToTarget (DataCollector &dataCollector, const juce::String& setting, const juce::var& value) override
         {
             targets[dataCollector.sinkIdx]->applySettingFromCollector (setting, value);
         }

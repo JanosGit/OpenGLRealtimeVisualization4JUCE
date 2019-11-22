@@ -102,7 +102,7 @@ namespace ntlab
          */
         void displaySettingsBar (bool shouldBeDisplayed);
 
-        void applySettingFromCollector (const juce::String& setting, juce::var& value) override;
+        void applySettingFromCollector (const juce::String& setting, const juce::var& value) override;
         void resized() override;
 
     private:

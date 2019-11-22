@@ -93,7 +93,7 @@ namespace ntlab
         valueTree.setProperty (parameterFrequencyLinearLog, shouldBeLog, undoManager);
     }
 
-    void SpectralAnalyzerComponent::applySettingFromCollector (const juce::String &setting, juce::var &value)
+    void SpectralAnalyzerComponent::applySettingFromCollector (const juce::String &setting, const juce::var &value)
     {
         if (setting == SpectralDataCollector::settingChannelNames)
         {

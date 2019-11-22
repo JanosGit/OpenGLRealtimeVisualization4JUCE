@@ -55,7 +55,7 @@ namespace ntlab
         void setDataSource (VisualizationDataSource *newDataSource) {dataSource = newDataSource; };
 
         /** This can be used to send settings from the DataCollector to the target*/
-        virtual void applySettingFromCollector (const juce::String& setting, juce::var& value) {};
+        virtual void applySettingFromCollector (const juce::String& setting, const juce::var& value) {};
 
         /** Should only be set by the source */
         int targetIdx = -1;
